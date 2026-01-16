@@ -1,6 +1,6 @@
-## cinemapedia
+# cinemapedia
 
-# toiminnot
+## toiminnot
 Apurina silloin kun ei osaa valita, mitä leffaa haluaa katsoa.
 
 * Käyttäjä pystyy luomaan tunnuksen ja kirjautumaan sisään sovellukseen.
@@ -11,14 +11,12 @@ Apurina silloin kun ei osaa valita, mitä leffaa haluaa katsoa.
 * Käyttäjä pystyy valitsemaan arvostelulleen yhden tai useamman luokittelun. Mahdolliset luokat ovat tietokannassa.
 * Sovelluksessa on mahdollista kommentoida muiden käyttäjien, sekä omia arvosteluja.
 
-# asennus ohjeet
+## asennus ohjeet
 Asenna `flask`-kirjasto:
-
 ```
 $ pip install flask
-
-...
+```
 Voit käynnistää sovelluksen näin:
-
-...
+```
 $ flask run
+``` 
