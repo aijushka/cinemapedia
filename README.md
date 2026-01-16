@@ -1,5 +1,7 @@
-# cinemapedia
-Apuväline silloin kun ei osaa valita, mitä elokuvaa haluaa katsoa.
+## cinemapedia
+
+# toiminnot
+Apurina silloin kun ei osaa valita, mitä leffaa haluaa katsoa.
 
 * Käyttäjä pystyy luomaan tunnuksen ja kirjautumaan sisään sovellukseen.
 * Käyttäjä pystyy lisäämään sovellukseen elokuvien arvosteluja. Lisäksi käyttäjä pystyy muokkaamaan ja poistamaan kyseisiä arvosteluja.
@@ -9,3 +11,12 @@ Apuväline silloin kun ei osaa valita, mitä elokuvaa haluaa katsoa.
 * Käyttäjä pystyy valitsemaan arvostelulleen yhden tai useamman luokittelun. Mahdolliset luokat ovat tietokannassa.
 * Sovelluksessa on mahdollista kommentoida muiden käyttäjien, sekä omia arvosteluja.
 
+# asennus ohjeet
+Asenna `flask`-kirjasto:
+
+```
+$ pip install flask
+...
+Voit käynnistää sovelluksen näin:
+...
+$ flask run
