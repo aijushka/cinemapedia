@@ -16,7 +16,9 @@ Asenna `flask`-kirjasto:
 
 ```
 $ pip install flask
+
 ...
 Voit käynnistää sovelluksen näin:
+
 ...
 $ flask run
