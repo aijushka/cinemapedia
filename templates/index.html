@@ -8,20 +8,21 @@
 <body>
   <h1>Cinemapedia</h1>
 
+  <h3>Tervetuloa Cinemapediaan, jossa voi arvostella elokuvia ja sarjoja. Sen avulla voit löytää helpommin katseltavaa!</h3>
+
   {% if session.username %}
   <p>
     Olet kirjautunut nimellä {{ session.username }}, id-numerosi: {{ session.user_id }}
+    <p>
+      <a href="/new_item">Uusi arvostelu</a>
+      <a href="/logout">Kirjaudu ulos</a>
+    </p>
   </p>
   {% endif %}
 
   <p>
     <a href="/login">Kirjaudu sisään</a>
     <a href="/register">Luo tunnus</a>
-    <a href="/logout">Kirjaudu ulos</a>
-  </p>
-
-  <p>
-    <a href="/new_item">Uusi arvostelu</a>
     <a href="/find_item">Etsi arvosteluja</a>
   </p>
 
