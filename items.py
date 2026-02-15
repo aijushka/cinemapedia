@@ -52,6 +52,8 @@ def update_item(item_id, title, description, rating):
     db.execute(sql, [title, description, rating, item_id])
 
 def remove_item(item_id):
+    sql = "DELETE FROM item_classes WHERE item_id = ?"
+    db.execute(sql, [item_id])
     sql = "DELETE FROM items WHERE id = ?"
     db.execute(sql, [item_id])
 
