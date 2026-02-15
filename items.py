@@ -14,7 +14,7 @@ def get_all_classes():
 
 def add_item(title, description, rating, user_id, classes):
     sql = """INSERT INTO items (title, description, rating, user_id)
-           VALUES (?, ?, ?, ?)"""
+             VALUES (?, ?, ?, ?)"""
     db.execute(sql, [title, description, rating, user_id])
 
     item_id = db.last_insert_id()
@@ -22,6 +22,18 @@ def add_item(title, description, rating, user_id, classes):
     sql = "INSERT INTO item_classes (item_id, title, value) VALUES (?, ?, ?)"
     for title, value in classes:
         db.execute(sql, [item_id, title, value])
+
+def add_comment(item_id, user_id, comment):
+    sql = """INSERT INTO comments (item_id, user_id, comment)
+             VALUES (?, ?, ?)"""
+    db.execute(sql, [item_id, user_id, comment])
+
+def get_comments(item_id):
+    sql = """SELECT comments, user.id, users.username
+             FROM comments, users
+             WHERE comments.item_id = ? AND comments.user_id = users.id
+             ORDER BY comments.id DESC"""
+    return db.query(sql, [item_id])
 
 def get_classes(item_id):
     sql = "SELECT title, value FROM item_classes WHERE item_id = ?"
@@ -38,8 +50,8 @@ def get_item(item_id):
                     items.rating,
                     users.id user_id,
                     users.username
-            FROM items, users
-            WHERE items.user_id = users.id AND
+             FROM items, users
+             WHERE items.user_id = users.id AND
                   items.id = ?"""
     result= db.query(sql, [item_id])
     return result[0] if result else None
