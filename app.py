@@ -72,11 +72,17 @@ def create_item():
     abort(403)
   user_id = session["user_id"]
 
+  all_classes = items.get_all_classes()
+
   classes = []
   for entry in request.form.getlist("classes"):
     if entry:
-      parts = entry.split(":")
-      classes.append((parts[0], parts[1]))
+      class_title, class_value = entry.split(":")
+      if class_title not in all_classes:
+        abort(403)
+      if class_value not in all_classes[class_title]:
+        abort(403)
+      classes.append((class_title, class_value))
 
   items.add_item(title, description, rating, user_id, classes)
 
@@ -137,14 +143,19 @@ def update_item():
   rating = request.form["rating"]
   if not rating or re.search("^[0-9]{0,2}$", rating):
     abort(403)
+  user_id = session["user_id"]
 
   classes = []
   for entry in request.form.getlist("classes"):
     if entry:
-      parts = entry.split(":")
-      classes.append((parts[0], parts[1]))
+      class_title, class_value = entry.split(":")
+      if class_title not in all_classes:
+        abort(403)
+      if class_value not in all_classes[class_title]:
+        abort(403)
+      classes.append((class_title, class_value))
 
-  items.update_item(item_id, title, description, rating)
+  items.update_item(item_id, title, description, rating, classes)
 
   return redirect("/item/" + str(item_id))
 
