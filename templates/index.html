@@ -15,16 +15,23 @@
   {% if session.username %}
   <p>
     Olet kirjautunut nimellä {{ session.username }}, id-numerosi: {{ session.user_id }}
-    <p>
-      <a href="/new_item">Uusi arvostelu</a>
-      <a href="/logout">Kirjaudu ulos</a>
-    </p>
+  </p>
+  <p>
+    <a href="/new_item">Uusi arvostelu</a>
+  </p>
+  <p>
+    <a href="/logout">Kirjaudu ulos</a>
+  </p>
+  {% else %}
+  <p>
+    <a href="/login">Kirjaudu sisään</a>
+  </p>
+  <p>
+    <a href="/register">Luo tunnus</a>
   </p>
   {% endif %}
 
   <p>
-    <a href="/login">Kirjaudu sisään</a>
-    <a href="/register">Luo tunnus</a>
     <a href="/find_item">Etsi arvosteluja</a>
   </p>
 

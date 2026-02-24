@@ -9,6 +9,10 @@ import users
 app = Flask(__name__)
 app.secret_key = config.secret_key
 
+def require_login():
+  if "user_id" not in session:
+    abort(403)
+
 @app.route("/")
 def index():
   all_items = items.get_items()
@@ -49,11 +53,13 @@ def show_item(item_id):
 
 @app.route("/new_item")
 def new_item():
+  require_login()
   classes = items.get_all_classes()
   return render_template("new_item.html", classes=classes)
 
 @app.route("/create_item", methods=["POST"])
 def create_item():
+  require_login()
   title = request.form["title"]
   if not title or len(title) > 100:
     abort(403)
@@ -74,7 +80,8 @@ def create_item():
   return redirect("/")
 
 @app.route("/create_comment", methods=["POST"])
-def create_item():
+def create_comment():
+  require_login()
   comment = request.form["comment"]
   if len(comment) > 500:
     abort(403)
@@ -92,15 +99,21 @@ def create_item():
 
 @app.route("/edit_item/<int:item_id>")
 def edit_item(item_id):
+  require_login()
   item = items.get_item(item_id)
+  if not item:
+    abort(404)
   if item["user_id"] != session["user_id"]:
     abort(403)
   return render_template("edit_item.html", item=item)
 
 @app.route("/update_item", methods=["POST"])
 def update_item():
+  require_login()
   item_id = request.form["item_id"]
   item = items.get_item(item_id)
+  if not item:
+    abort(404)
   if item["user_id"] != session["user_id"]:
     abort(403)
 
@@ -120,7 +133,10 @@ def update_item():
 
 @app.route("/remove_item/<int:item_id>", methods=["GET", "POST"])
 def remove_item(item_id):
+  require_login()
   item = items.get_item(item_id)
+  if not item:
+    abort(404)
   if item["user_id"] != session["user_id"]:
     abort(403)
 
