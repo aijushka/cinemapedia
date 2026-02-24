@@ -5,6 +5,7 @@ import config
 import db
 import items
 import users
+import re
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
@@ -61,12 +62,14 @@ def new_item():
 def create_item():
   require_login()
   title = request.form["title"]
-  if not title or len(title) > 100:
+  if not title or len(title) > 50:
     abort(403)
   description  = request.form["description"]
   if len(description) > 1000:
     abort(403)
   rating = request.form["rating"]
+  if not re.search("^[0-9]{0,2}$", rating):
+    abort(403)
   user_id = session["user_id"]
 
   classes = []
@@ -105,7 +108,15 @@ def edit_item(item_id):
     abort(404)
   if item["user_id"] != session["user_id"]:
     abort(403)
-  return render_template("edit_item.html", item=item)
+
+  all_classes = items.get_all_classes()
+  classes = {}
+  for my_class in all_classes:
+    classes[my_class] = ""
+  for entry in items.get_classes(item_id):
+    classes[entry["title"]] = entry["value"]
+
+  return render_template("edit_item.html", item=item, classes=classes, all_classes=all_classes)
 
 @app.route("/update_item", methods=["POST"])
 def update_item():
@@ -118,12 +129,20 @@ def update_item():
     abort(403)
 
   title = request.form["title"]
-  if not title or len(title) > 100:
+  if not title or len(title) > 50:
     abort(403)
   description  = request.form["description"]
-  if not description or len(description) > 1000:
+  if len(description) > 1000:
     abort(403)
   rating = request.form["rating"]
+  if not rating or re.search("^[0-9]{0,2}$", rating):
+    abort(403)
+
+  classes = []
+  for entry in request.form.getlist("classes"):
+    if entry:
+      parts = entry.split(":")
+      classes.append((parts[0], parts[1]))
 
   items.update_item(item_id, title, description, rating)
 

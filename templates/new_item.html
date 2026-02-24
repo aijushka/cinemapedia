@@ -10,11 +10,11 @@
     <form action="/create_item" method="post">
         <p>
             Elokuvan tai sarjan nimi: <br />
-            <input type="text" name="title" maxlength="100" required/>
+            <input type="text" name="title" maxlength="50" required/>
         </p>
         <p>
             Mitä pidit: <br />
-            <input type="text" name="rating" size="4" required/> /10
+            <input type="text" name="rating" size="4" pattern="^[0-9]{0,2}" required/> /10
         </p>
         <p>
             Arvostelu: <br />
@@ -30,6 +30,8 @@
             {% endfor %}
             </select>
         </p>
+        #miten saadaan koodattuu tähän versioon monivalinta option?
+        #ninku kurssimatskus "radio" & "checkbox"
         {% endfor %}
         <input type="submit" value="Luo arvostelu" />
     </form>
