@@ -1,33 +1,24 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Etsi arvosteluja</title>
-</head>
+{% block title %}Cinemapedia{% endblock %}
 
-<body>
-  <h1>Etsi arvosteluja</h1>
+{% block content %}
+<h2>Etsi arvosteluja</h2>
 
-  <form action="/find_item" method="get">
-    <p>
-        Hakusana: <input type="text" name="query" value="{{ query }}">
-    </p>
-    <input type="submit" value="Lähetä">
-  </form>
-
+<form action="/find_item" method="get">
   <p>
-    <a href="/">Takaisin</a>
+    Hakusana: <input type="text" name="query" value="{{ query }}">
   </p>
+  <input type="submit" value="Lähetä">
+</form>
+{% if query %}
 
-  {% if query %}
-  <h2>Tulokset</h2>
+<h2>Tulokset</h2>
 
-  <ul>
-    {% for item in results %}
-    <li><a href="/item/{{ item.id }}">{{ item.title }}</a></li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-</body>
-
-</html>
+<ul>
+  {% for item in results %}
+  <li><a href="/item/{{ item.id }}">{{ item.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

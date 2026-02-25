@@ -1,40 +1,35 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Uusi arvostelu</title>
-</head>
+{% block title %}Cinemapedia{% endblock %}
 
-<body>
-    <h1>Uusi arvostelu</h1>
-    <form action="/create_item" method="post">
-        <p>
-            Elokuvan tai sarjan nimi: <br />
-            <input type="text" name="title" maxlength="50" required/>
-        </p>
-        <p>
-            Mitä pidit: <br />
-            <input type="text" name="rating" size="4" pattern="^[0-9]{0,2}" required/> /10
-        </p>
-        <p>
-            Arvostelu: <br />
-            <textarea name="description" rows="8" cols="60" maxlength="1000"></textarea>
-        </p>
-        {% for class in classes %}
-        <p>
-            {{ class }}: <br />
-            <select name="classes">
-                <option value="">(valitse)</option>
-            {% for option in classes[class] %}
-                <option value="{{ class }}:{{ option }}">{{ option }}</option>
-            {% endfor %}
-            </select>
-        </p>
-        #miten saadaan koodattuu tähän versioon monivalinta option?
-        #ninku kurssimatskus "radio" & "checkbox"
+{% block content %}
+<h2>Lisää uusi arvostelu</h2>
+<form action="/create_item" method="post">
+    <p>
+        Elokuvan tai sarjan nimi: <br />
+        <input type="text" name="title" maxlength="50" required/>
+    </p>
+    <p>
+        Mitä pidit: <br />
+        <input type="text" name="rating" size="4" pattern="^[0-9]{0,2}" required/> /10
+    </p>
+    <p>
+        Arvostelu: <br />
+        <textarea name="description" rows="8" cols="60" maxlength="1000"></textarea>
+    </p>
+    {% for class in classes %}
+    <p>
+        {{ class }}: <br />
+        <select name="classes">
+            <option value="">(valitse)</option>
+        {% for option in classes[class] %}
+            <option value="{{ class }}:{{ option }}">{{ option }}</option>
         {% endfor %}
-        <input type="submit" value="Luo arvostelu" />
-    </form>
-</body>
+        </select>
+    </p>
+    {% endfor %}
+    <input type="submit" value="Luo arvostelu" />
+</form>
+{% endblock %}
 
-</html>
+# miten saadaan koodattuu tähän versioon monivalinta option? ninku kurssimatskus "radio" & "checkbox"
