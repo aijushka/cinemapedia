@@ -7,6 +7,7 @@
 <h3>Arvostelun poisto</h3>
 <p>Haluatko varmasti poistaa tämän arvostelun, Men In Black style?</p>
 <form action="/remove_item/{{ item.id }}" method="post">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
     <input type="submit" name="remove" value="Haluan">
     <input type="submit" name="back" value="Eiku">
 </form>

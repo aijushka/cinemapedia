@@ -1,3 +1,4 @@
+import secrets
 import sqlite3
 from flask import Flask
 from flask import flash, abort, redirect, render_template, request, session
@@ -9,6 +10,12 @@ import re
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
+
+def check_csrf():
+    if "csrf_token" not in request.form:
+      abort(403)
+    if request.form["csrf_token"] != session["csrf_token"]:
+      abort(403)
 
 def require_login():
   if "user_id" not in session:
@@ -54,12 +61,14 @@ def show_item(item_id):
 
 @app.route("/new_item")
 def new_item():
+  check_csrf()
   require_login()
   classes = items.get_all_classes()
   return render_template("new_item.html", classes=classes)
 
 @app.route("/create_item", methods=["POST"])
 def create_item():
+  check_csrf()
   require_login()
   title = request.form["title"]
   if not title or len(title) > 50:
@@ -91,6 +100,7 @@ def create_item():
 
 @app.route("/create_comment", methods=["POST"])
 def create_comment():
+  check_csrf()
   require_login()
   comment = request.form["comment"]
   if len(comment) > 500:
@@ -109,6 +119,7 @@ def create_comment():
 
 @app.route("/edit_item/<int:item_id>")
 def edit_item(item_id):
+  check_csrf()
   require_login()
   item = items.get_item(item_id)
   if not item:
@@ -127,6 +138,7 @@ def edit_item(item_id):
 
 @app.route("/update_item", methods=["POST"])
 def update_item():
+  check_csrf()
   require_login()
   item_id = request.form["item_id"]
   item = items.get_item(item_id)
@@ -166,6 +178,7 @@ def update_item():
 
 @app.route("/remove_item/<int:item_id>", methods=["GET", "POST"])
 def remove_item(item_id):
+  check_csrf()
   require_login()
   item = items.get_item(item_id)
   if not item:
@@ -220,6 +233,7 @@ def login():
   user_id = users.check_login(username, password)
   if user_id:
     session["user_id"] = user_id
+    session["csrf_token"] = secrets.token_hex(16)
     session["username"] = username
     return redirect("/")
   else:
