@@ -3,11 +3,14 @@
 {% block title %}Cinemapedia{% endblock %}
 
 {% block content %}
-<h2>Arvostelun poisto</h2>
-<p>Arvostelu: {{ item.title }}</p>
+<h2>{{ item.title }}</h2>
+<h3>Arvostelun poisto</h3>
 <p>Haluatko varmasti poistaa tämän arvostelun, Men In Black style?</p>
 <form action="/remove_item/{{ item.id }}" method="post">
     <input type="submit" name="remove" value="Haluan">
     <input type="submit" name="back" value="Eiku">
 </form>
+<p>
+    <a href="/item/{{ item.id }}">Takaisin ilmoitukseen</a>
+</p>
 {% endblock %}

@@ -86,6 +86,7 @@ def create_item():
 
   items.add_item(title, description, rating, user_id, classes)
 
+  item_id = db.last_insert_id()  #tää ei toimi miten pitäis (miten korjaan?)
   return redirect("/")
 
 @app.route("/create_comment", methods=["POST"])
@@ -144,6 +145,8 @@ def update_item():
   if not rating or re.search("^[0-9]{0,2}$", rating):
     abort(403)
   user_id = session["user_id"]
+
+  all_classes = items.get_all_classes()
 
   classes = []
   for entry in request.form.getlist("classes"):
