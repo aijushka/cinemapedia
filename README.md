@@ -1,7 +1,7 @@
 # Cinemapedia™
 Apurina silloin kun ei osaa valita, mitä leffaa tai sarjaa haluaa katsoa.
 
-## toiminnot (so far)
+## toiminnot
 * Käyttäjä pystyy luomaan tunnuksen ja kirjautumaan sisään sovellukseen.
 * Käyttäjä pystyy lisäämään sovellukseen elokuvien arvosteluja. Lisäksi käyttäjä pystyy muokkaamaan ja poistamaan kyseisiä arvosteluja.
 * Käyttäjä näkee sekä itse lisäämänsä että muiden käyttäjien lisäämät arvostelut.
