@@ -8,8 +8,6 @@ Apurina silloin kun ei osaa valita, mitä leffaa tai sarjaa haluaa katsoa.
 * Käyttäjä pystyy etsimään elokuvia eri hakusanoilla. Käyttäjä pystyy hakemaan sekä itse lisäämiään että muiden käyttäjien lisäämiä arvosteluja.
 * Sovelluksessa on käyttäjäsivut, jotka näyttävät jokaisesta käyttäjästä tilastoja ja käyttäjän lisäämät arvostelut.
 * Käyttäjä pystyy valitsemaan arvostelulleen yhden tai useamman luokittelun. Mahdolliset luokat ovat tietokannassa.
-
-## #isoijuttuitulos
 * Sovelluksessa on mahdollista kommentoida muiden käyttäjien, sekä omia arvosteluja.
 
 ## asennus-ohjeet

@@ -9,11 +9,14 @@
 <body>
   <h1>Cinemapedia</h1>
 
-  <h3>Tervetuloa Cinemapediaan, jossa voi arvostella elokuvia ja sarjoja.
-    Täällä voit selailla arvosteluja, keskustella muiden kanssa leffoista ja sarjoista,
-    sekä löytää jotain uutta katseltavaa!</h3>
+  <h3>
+  <p>Tervetuloa Cinemapediaan!</p>
+  <p>Täällä voit kirjoittaa omia arvosteluja, sekä selailla ja kommentoida muiden Cinemapedian käyttäjien arvosteluja.</p>
+  <p>Voitte keskustella käyttäjien kesken leffoista ja sarjoista kommenteissa, sekä löytää jotain uutta katseltavaa.</p>
+  <p>Rekisteröidy ja pidä hauskaa!!</p>
+  </h3>
 
-  {% if session.username %}
+  {% if session.user_id %}
   <p>
     Olet kirjautunut nimellä <a href="/user/{{ session.user_id }}">{{ session.username }}</a>
   </p>

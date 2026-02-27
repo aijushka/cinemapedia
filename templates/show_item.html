@@ -11,7 +11,7 @@
 </p>
 {% endif %}
 <p>
-    {{ item.description }}
+    {{ item.description | show_lines }}
 </p>
 <ul>
     <li>Pisteet: {{ item.rating }} /10</li>
@@ -24,9 +24,15 @@
 </ul>
 <h2>Kommentit</h2>
 <ul>
-    {% for comment in comments %}
-    <li>{{ comment }}, <a href="/user/{{ comment.user_id }}">{{ comment.username }}</a></li>
-    {% endfor %}
+{% for comment in comments %}
+    <li>{{ comment.comment }}, <a href="/user/{{ comment.user_id }}">{{ comment.username }}</a></li>
+    {% if session.user_id == comment.user_id %}
+    <p>
+        <a href="/edit_comment/{{ comment_id }}">Muokkaa</a>
+        <a href="/remove_comment/{{ comment_id }}">Poista</a>
+    </p>
+    {% endif %}
+{% endfor %}
 </ul>
 {% if session.user_id %}
 <h3>Penny for your thoughts?</h3>
@@ -34,7 +40,7 @@
     <input type="text" name="comment" size="20" required />
     <input type="hidden" name="item_id" value="{{ item.id }}">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
-    <input type="submit" value="Lähetä" />
+    <input type="submit" value="Kommentoi" />
 </form>
 {% endif %}
 {% endblock %}

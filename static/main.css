@@ -1,18 +1,18 @@
 body {
   margin: auto;
-  max-width: 50em;
+  max-width: 100em;
   font-family: sans-serif;
   background-color: rgb(167, 122, 206);
 }
 
 .item {
-  border: 2px solid black;
+  border: 2px solid rgb(226, 13, 134);
   margin: 1em;
   padding: 0.2em 0.5em;
 }
 
 .info {
-  border: 2px solid black;
+  border: 2px solid red;
   margin: 1em;
   padding: 0.5em;
   background-color: red;

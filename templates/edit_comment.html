@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}Cinemapedia{% endblock %}
+
+{% block content %}
+<h3>Muokkaa kommenttia:</h3>
+</form>
+<form action="/edit_comment" method="post">
+    <p>
+        Kommentti:<br />
+        <textarea name="comment" rows="5" cols="40">{{ comment }}</textarea>
+    </p>
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+    <input type="submit" value="Lähetä" />
+</form>

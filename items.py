@@ -20,8 +20,8 @@ def add_item(title, description, rating, user_id, classes):
     item_id = db.last_insert_id()
 
     sql = "INSERT INTO item_classes (item_id, title, value) VALUES (?, ?, ?)"
-    for title, value in classes:
-        db.execute(sql, [item_id, title, value])
+    for class_title, class_value in classes:
+        db.execute(sql, [item_id, class_title, class_value])
 
 def add_comment(item_id, user_id, comment):
     sql = """INSERT INTO comments (item_id, user_id, comment)
@@ -29,9 +29,13 @@ def add_comment(item_id, user_id, comment):
     db.execute(sql, [item_id, user_id, comment])
 
 def get_comments(item_id):
-    sql = """SELECT comments, user.id, users.username
-             FROM comments, users
-             WHERE comments.item_id = ? AND comments.user_id = users.id
+    sql = """SELECT comments.id,
+                    comments.comment,
+                    comments.user_id,
+                    users.username
+             FROM comments
+             JOIN users ON comments.user_id = users.id
+             WHERE comments.item_id = ?
              ORDER BY comments.id DESC"""
     return db.query(sql, [item_id])
 
@@ -41,8 +45,8 @@ def get_classes(item_id):
 
 def get_items():
     sql = """SELECT items.id, items.title, items.rating, users.id user_id, users.username
-             FROM items, users
-             WHERE items.user_id = users.id
+             FROM items JOIN users ON items.user_id = users.id
+             GROUP BY items.id
              ORDER BY items.id DESC"""
     return db.query(sql)
 
@@ -55,7 +59,7 @@ def get_item(item_id):
                     users.username
              FROM items, users
              WHERE items.user_id = users.id AND
-                  items.id = ?"""
+                   items.id = ?"""
     result = db.query(sql, [item_id])
     return result[0] if result else None
 
@@ -70,8 +74,12 @@ def update_item(item_id, title, description, rating, classes):
     db.execute(sql, [item_id])
 
     sql = "INSERT INTO item_classes (item_id, title, value) VALUES (?, ?, ?)"
-    for title, value in classes:
-        db.execute(sql, [item_id, title, value])
+    for class_title, class_value in classes:
+        db.execute(sql, [item_id, class_title, class_value])
+
+def update_comment(comment_id, comment):
+    sql = "UPDATE comments SET comment.comment = ? WHERE id = ?"
+    db.execute(sql, [comment.comment, comment_id])
 
 def remove_item(item_id):
     sql = "DELETE FROM comments WHERE item_id = ?"
@@ -80,6 +88,10 @@ def remove_item(item_id):
     db.execute(sql, [item_id])
     sql = "DELETE FROM items WHERE id = ?"
     db.execute(sql, [item_id])
+
+def remove_comment(comment_id):
+    sql = "DELETE FROM comments WHERE id = ?"
+    db.execute(sql, [comment_id])
 
 def find_items(query):
     sql = """SELECT id, title

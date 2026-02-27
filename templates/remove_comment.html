@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}Cinemapedia{% endblock %}
+
+{% block content %}
+<h2>{{ comment.comment }}</h2>
+<h3>Kommentin poisto</h3>
+<form action="/remove_comment/{{ comment_id }}" method="post">
+    <p>
+        Haluatko varmasti poistaa kommentin?
+    </p>
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+    <input type="submit" name="continue" value="Joo" />
+    <input type="submit" name="cancel" value="Ei sittenkään" />
+</form>
