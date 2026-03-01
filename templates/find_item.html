@@ -6,20 +6,20 @@
 <h2>Etsi arvosteluja</h2>
 
 <form action="/find_item" method="get">
-  <p>
-    <label for="query">Hakusana</label>:
-    <input type="text" name="query" id="query" value="{{ query }}">
-  </p>
-  <input type="submit" value="Lähetä">
+    <p>
+        <label for="query">Hakusana</label>:
+        <input type="text" name="query" id="query" value="{{ query }}">
+    </p>
+    <input type="submit" value="Lähetä">
 </form>
 
 {% if query %}
 <h2>Tulokset</h2>
 
 <ul>
-  {% for item in results %}
-  <li><a href="/item/{{ item.id }}">{{ item.title }}</a></li>
-  {% endfor %}
+    {% for item in results %}
+    <li><a href="/item/{{ item.id }}">{{ item.title }}</a></li>
+    {% endfor %}
 </ul>
 {% endif %}
 {% endblock %}

@@ -2,45 +2,45 @@
 <html>
 
 <head>
-  <title>{% block title %}{% endblock %}</title>
-  <link rel="stylesheet" href="/static/main.css">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/main.css">
 </head>
 
 <body>
-  <h1>Cinemapedia</h1>
+    <h1>Cinemapedia</h1>
 
-  <h3>
-  <p>Tervetuloa Cinemapediaan!</p>
-  <p>Täällä voit kirjoittaa omia arvosteluja, sekä selailla ja kommentoida muiden Cinemapedian käyttäjien arvosteluja.</p>
-  <p>Voitte keskustella käyttäjien kesken leffoista ja sarjoista kommenteissa, sekä löytää jotain uutta katseltavaa.</p>
-  <p>Rekisteröidy ja pidä hauskaa!!</p>
-  </h3>
+    <h3>
+    <p>Tervetuloa Cinemapediaan!</p>
+    <p>Täällä voit kirjoittaa omia arvosteluja, sekä selailla ja kommentoida muiden Cinemapedian käyttäjien arvosteluja.</p>
+    <p>Voitte keskustella käyttäjien kesken leffoista ja sarjoista kommenteissa, sekä löytää jotain uutta katseltavaa.</p>
+    <p>Rekisteröidy ja pidä hauskaa!!</p>
+    </h3>
 
-  {% if session.user_id %}
-  <p>
-    Olet kirjautunut nimellä <a href="/user/{{ session.user_id }}">{{ session.username }}</a>
-  </p>
-  {% endif %}
+    {% if session.user_id %}
+    <p>
+        Olet kirjautunut nimellä <a href="/user/{{ session.user_id }}">{{ session.username }}</a>
+    </p>
+    {% endif %}
 
-  <p>
-    <a href="/">Etusivu</a> |
-    <a href="/find_item">Etsi arvosteluja</a> |
-  {% if session.user_id %}
-    <a href="/new_item">Uusi arvostelu</a> |
-    <a href="/logout">Kirjaudu ulos</a>
-  {% else %}
-    <a href="/login">Kirjaudu sisään</a> |
-    <a href="/register">Luo tunnus</a>
-  {% endif %}
-  </p>
+    <p>
+        <a href="/">Etusivu</a> |
+        <a href="/find_item">Etsi arvosteluja</a> |
+    {% if session.user_id %}
+        <a href="/new_item">Uusi arvostelu</a> |
+        <a href="/logout">Kirjaudu ulos</a>
+    {% else %}
+        <a href="/login">Kirjaudu sisään</a> |
+        <a href="/register">Luo tunnus</a>
+    {% endif %}
+    </p>
 
-  {% for message in get_flashed_messages() %}
-  <div class="info">
-    {{ message }}
-  </div>
-  {% endfor %}
+    {% for message in get_flashed_messages() %}
+    <div class="info">
+        {{ message }}
+    </div>
+    {% endfor %}
 
-  {% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 </body>
 
 </html>
