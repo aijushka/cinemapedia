@@ -188,7 +188,7 @@ def edit_comment(comment_id):
     check_csrf()
     require_login()
 
-    comment = items.get_comment(comment_id)
+    comment = items.get_comments(comment_id)
     if not comment:
         abort(404)
     if comment["user_id"] != session["user_id"]:
@@ -229,7 +229,7 @@ def remove_item(item_id):
 def remove_comment(comment_id):
     require_login()
 
-    comment = items.get_comment(comment_id)
+    comment = items.get_comments(comment_id)
     if not comment:
         abort(404)
     if comment["user_id"] != session["user_id"]:
