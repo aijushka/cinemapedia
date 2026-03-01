@@ -1,26 +1,26 @@
 # Cinemapedia™
-Apurina silloin kun ei osaa valita, mitä leffaa tai sarjaa haluaa katsoa.
+Sovellus elokuvien ja sarjojen arvosteluille.
 
 ## toiminnot
 * Käyttäjä pystyy luomaan tunnuksen ja kirjautumaan sisään sovellukseen.
-* Käyttäjä pystyy lisäämään sovellukseen elokuvien arvosteluja. Lisäksi käyttäjä pystyy muokkaamaan ja poistamaan kyseisiä arvosteluja.
+* Käyttäjä pystyy lisäämään sovellukseen elokuvien ja sarjojen arvosteluja. Lisäksi käyttäjä pystyy muokkaamaan ja poistamaan omia arvostelujaan.
 * Käyttäjä näkee sekä itse lisäämänsä että muiden käyttäjien lisäämät arvostelut.
-* Käyttäjä pystyy etsimään elokuvia eri hakusanoilla. Käyttäjä pystyy hakemaan sekä itse lisäämiään että muiden käyttäjien lisäämiä arvosteluja.
-* Sovelluksessa on käyttäjäsivut, jotka näyttävät jokaisesta käyttäjästä tilastoja ja käyttäjän lisäämät arvostelut.
-* Käyttäjä pystyy valitsemaan arvostelulleen yhden tai useamman luokittelun. Mahdolliset luokat ovat tietokannassa.
-* Sovelluksessa on mahdollista kommentoida muiden käyttäjien, sekä omia arvosteluja.
+* Käyttäjä pystyy etsimään arvosteluja/elokuvia/sarjoja eri hakusanoilla. Hakiessa käyttäjä näkee sekä itse lisätyt että muiden käyttäjien arvostelut.
+* Sovelluksessa on käyttäjäsivut, jotka näyttävät käyttäjien arvostelujen lukumäärän ja niiden lisäämät arvostelut.
+* Käyttäjä pystyy valitsemaan arvostelulleen genre- ja kieli-luokittelun. Mahdolliset luokat löytyy tietokannasta.
+* Sovelluksessa on mahdollista kommentoida muiden käyttäjien, sekä omiin arvosteluihin.
 
 ## asennus-ohjeet
-Asenna `flask`-kirjasto:
+Asenna `flask`-kirjasto
 ```
 $ pip install flask
 ```
-Luo tietokannan taulut ja lisää alkutiedot:
+Lisää alkutiedot (init.sql) ja tietokannan taulut (schema.sql)
 ```
 $ sqlite3 database.db < schema.sql
 $ sqlite3 database.db < init.sql
 ```
-Voit käynnistää sovelluksen näin:
+Käynnistä sovellus!
 ```
 $ flask run
 ``` 
